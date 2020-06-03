@@ -60,7 +60,12 @@ class Document
 
     public function verify(User $verifier): void
     {
+        if (!$this->canBeVerified($this, $verifier)) {
+            throw new \LogicException();
+        }
 
+        $this->status = DocumentStatus::VERIFIED();
+        $this->verifier = $verifier;
     }
 
     public function publish(): void
@@ -80,7 +85,8 @@ class Document
 
     public function changeContent(string $title, string $content): void
     {
-
+        $this->title = $title;
+        $this->content = $content;
     }
 
     /**
@@ -108,10 +114,41 @@ class Document
     }
 
     /**
+     * @return string
+     */
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    /**
+     * @return User
+     */
+    public function getVerifier(): User
+    {
+        return $this->verifier;
+    }
+
+    /**
      * @return User
      */
     public function getAuthor(): User
     {
         return $this->author;
+    }
+
+    private function canBeVerified(Document $document, User $verifier)
+    {
+        return !empty($document->getTitle()) &&
+            !$document->getAuthor()->equals($verifier) &&
+            $document->getStatus()->equals(DocumentStatus::DRAFT()); // kolejne warunki
     }
 }
