@@ -2,6 +2,7 @@
 
 namespace Tests\DocFlow\Unit\Domain;
 
+use DocFlow\Domain\Clock\Fixed;
 use DocFlow\Domain\Document;
 use DocFlow\Domain\DocumentStatus;
 use DocFlow\Domain\DocumentType;
@@ -19,8 +20,9 @@ class DocumentTest extends TestCase
         // Act / When
         $author = new User();
         $type = DocumentType::INSTRUCTION();
-        $number = $type . '/' . date('Y/m/d');
-        $document = new Document($type, $author); // ups, tu jest problem z czasem, zmienia sie
+        $clock = new Fixed(new \DateTimeImmutable('2020-06-03 14:00:00'));
+        $number = $type . '/' . $clock->getDateTime()->format('Y/m/d');
+        $document = new Document($type, $author, $clock); // ups, tu jest problem z czasem, zmienia sie
 
         // Assert / Then
         $this->assertEquals(DocumentStatus::DRAFT(), $document->getStatus());

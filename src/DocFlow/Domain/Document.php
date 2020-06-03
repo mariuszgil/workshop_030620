@@ -48,13 +48,14 @@ class Document
      * Document constructor.
      * @param DocumentType $type
      * @param User $author
+     * @param Clock $clock
      */
-    public function __construct(DocumentType $type, User $author)
+    public function __construct(DocumentType $type, User $author, Clock $clock)
     {
         $this->type = $type;
         $this->author = $author;
         $this->status = DocumentStatus::DRAFT();
-        $this->number = $type . '/' . date('Y/m/d');
+        $this->number = $type . '/' . $clock->getDateTime()->format('Y/m/d');
     }
 
     public function verify(User $verifier): void
