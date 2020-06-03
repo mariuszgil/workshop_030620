@@ -1,0 +1,11 @@
+{
+  "autoload": {
+    "psr-4": {
+      "": "src/"
+    }
+  },
+  "require": {
+    "phpunit/phpunit": "^9.1",
+    "myclabs/php-enum": "^1.7"
+  }
+}
