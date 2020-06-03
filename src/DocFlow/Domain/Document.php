@@ -54,6 +54,7 @@ class Document
         $this->type = $type;
         $this->author = $author;
         $this->status = DocumentStatus::DRAFT();
+        $this->number = $type . '/' . date('Y/m/d');
     }
 
     public function verify(User $verifier): void
@@ -87,5 +88,29 @@ class Document
     public function getStatus(): DocumentStatus
     {
         return $this->status;
+    }
+
+    /**
+     * @return DocumentType
+     */
+    public function getType(): DocumentType
+    {
+        return $this->type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNumber(): string
+    {
+        return $this->number;
+    }
+
+    /**
+     * @return User
+     */
+    public function getAuthor(): User
+    {
+        return $this->author;
     }
 }

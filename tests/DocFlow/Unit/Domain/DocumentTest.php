@@ -18,9 +18,14 @@ class DocumentTest extends TestCase
         // Arrange / Given
         // Act / When
         $author = new User();
-        $document = new Document(DocumentType::INSTRUCTION(), $author);
+        $type = DocumentType::INSTRUCTION();
+        $number = $type . '/' . date('Y/m/d');
+        $document = new Document($type, $author); // ups, tu jest problem z czasem, zmienia sie
 
         // Assert / Then
         $this->assertEquals(DocumentStatus::DRAFT(), $document->getStatus());
+        $this->assertEquals($type, $document->getType());
+        $this->assertEquals($author, $document->getAuthor());
+        $this->assertEquals($number, $document->getNumber());
     }
 }
