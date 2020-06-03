@@ -30,4 +30,11 @@ class DocumentTest extends TestCase
         $this->assertEquals($author, $document->getAuthor());
         $this->assertEquals($number, $document->getNumber());
     }
+
+    public function test2() // ta nazwa jest masakryczna...
+    {
+        $this->expectException(\LogicException::class);
+
+        throw new \LogicException();
+    }
 }
