@@ -6,7 +6,6 @@ use DocFlow\Domain\Document;
 use DocFlow\Domain\DocumentStatus;
 use DocFlow\Domain\DocumentType;
 use DocFlow\Domain\User;
-use phpDocumentor\Reflection\DocBlock\Tags\Author;
 use PHPUnit\Framework\TestCase;
 
 class DocumentTest extends TestCase
