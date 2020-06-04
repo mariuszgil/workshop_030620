@@ -14,21 +14,23 @@ class InMemoryDocuments implements Documents
 
     public function get(string $number): Document
     {
-        // TODO: Implement get() method.
+        // if, czy istnieje...
+
+        return $this->documents[$number];
     }
 
     public function getAll(): array
     {
-        // TODO: Implement getAll() method.
+        return array_values($this->documents);
     }
 
     public function save(Document $document): void
     {
-        // TODO: Implement save() method.
+        $this->documents[$document->getNumber()] = $document;
     }
 
     public function delete(string $number): void
     {
-        // TODO: Implement delete() method.
+        unset($this->documents[$number]);
     }
 }
