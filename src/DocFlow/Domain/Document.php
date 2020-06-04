@@ -67,6 +67,7 @@ class Document
 
         $this->status = DocumentStatus::VERIFIED();
         $this->verifier = $verifier;
+        $this->readers[] = $verifier;
     }
 
     public function publish(): void

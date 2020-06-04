@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 // TEST CASE CLASS PER CLASS
 // TEST CASE CLASS PER FEATURE -> 2 podejscie
-class DocumentCreationTest extends DocumentBaseTest
+class DocumentCreationTest extends DocumentBase
 {
     /**
      * @test

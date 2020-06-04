@@ -11,7 +11,7 @@ use DocFlow\Domain\DocumentType;
 use DocFlow\Domain\User;
 use PHPUnit\Framework\TestCase;
 
-class DocumentBaseTest extends TestCase
+class DocumentBase extends TestCase
 {
     /**
      * @var User

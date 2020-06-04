@@ -7,7 +7,7 @@ namespace Tests\DocFlow\Unit\Domain;
 use DocFlow\Domain\DocumentType;
 use DocFlow\Domain\User;
 
-class DocumentReadersAddTest extends DocumentBaseTest
+class DocumentAddingReadersTest extends DocumentBase
 {
     public function testCanAddNewUser()
     {
@@ -25,12 +25,31 @@ class DocumentReadersAddTest extends DocumentBaseTest
         $user = new User('reader');
         $readersCount = $document->getReadersCount();
 
-//        $document->addReader($user);
-//        $document->addReader($user);
-        $document->addReader($document->getAuthor());
-        $document->addReader($document->getAuthor());
+        $document->addReader($user);
+        $document->addReader($user);
 
         $this->assertTrue($document->isOnReadersList($user));
         $this->assertEquals($readersCount + 1, $document->getReadersCount());
+    }
+
+    /**
+     * @dataProvider getReaders
+     * @param User $reader
+     */
+    public function testSomeDefaultReadersAreAddedToList(User $reader)
+    {
+        $document = $this->createDocument(DocumentType::INSTRUCTION());
+        $document->changeContent('title', 'content');
+        $document->verify($this->verifier);
+
+        $this->assertTrue($document->isOnReadersList($reader));
+    }
+
+    public function getReaders(): array
+    {
+        return [
+            'Author must be on the list' => [new User('author')],
+            'Verifier must be on the list' => [new User('verifier')]
+        ];
     }
 }
