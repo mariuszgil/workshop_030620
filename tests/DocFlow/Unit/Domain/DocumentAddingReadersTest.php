@@ -52,4 +52,25 @@ class DocumentAddingReadersTest extends DocumentBase
             'Verifier must be on the list' => [new User('verifier')]
         ];
     }
+
+    /**
+     * @group dumper
+     */
+    public function testX()
+    {
+        $document = $this->createDocument(DocumentType::INSTRUCTION());
+        $user = new User('reader');
+
+        $document->addReader($user);
+        $document->changeContent('t', 'c');
+        $document->verify($this->verifier);
+
+        //
+        foreach ($document->getReaders() as $reader) {
+            var_dump($reader->getUsername());
+        }
+        //
+
+        $this->assertTrue($document->isOnReadersList($user));
+    }
 }

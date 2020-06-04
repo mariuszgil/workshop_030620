@@ -2,6 +2,9 @@
 
 namespace DocFlow\Domain;
 
+use DocFlow\Domain\User\Suffixed;
+use DocFlow\Domain\User\Uppercased;
+
 class Document
 {
     /**
@@ -147,6 +150,23 @@ class Document
     public function getAuthor(): User
     {
         return $this->author;
+    }
+
+    public function getReaders(): array
+    {
+        $readers = [];
+
+        foreach ($this->readers as $reader) {
+            if ($reader->equals($this->author)) {
+                $readers[] = new Suffixed(new Uppercased($reader), 'author');
+            } elseif ($this->verifier && $reader->equals($this->verifier)) {
+                $readers[] = new Suffixed(new Uppercased($reader), 'verifier');
+            } else {
+                $readers[] = $reader;
+            }
+        }
+
+        return $readers;
     }
 
     private function canBeVerified(Document $document, User $verifier)

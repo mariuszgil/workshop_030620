@@ -2,7 +2,7 @@
 
 namespace DocFlow\Domain;
 
-class User
+class User implements IUser
 {
     /**
      * @var string
