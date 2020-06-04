@@ -56,6 +56,7 @@ class Document
         $this->author = $author;
         $this->status = DocumentStatus::DRAFT();
         $this->number = $type . '/' . $clock->getDateTime()->format('Y/m/d');
+        $this->readers[] = $author;
     }
 
     public function verify(User $verifier): void
@@ -80,7 +81,9 @@ class Document
 
     public function addReader(User $reader)
     {
-
+        if (!$this->isOnReadersList($reader)) {
+            $this->readers[] = $reader;
+        }
     }
 
     public function changeContent(string $title, string $content): void
@@ -150,5 +153,15 @@ class Document
         return !empty($document->getTitle()) &&
             !$document->getAuthor()->equals($verifier) &&
             $document->getStatus()->equals(DocumentStatus::DRAFT()); // kolejne warunki
+    }
+
+    public function isOnReadersList(User $reader): bool
+    {
+        return in_array($reader, $this->readers);
+    }
+
+    public function getReadersCount(): int
+    {
+        return count($this->readers);
     }
 }
