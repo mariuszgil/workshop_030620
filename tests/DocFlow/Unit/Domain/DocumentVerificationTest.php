@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 // TEST CASE CLASS PER CLASS
 // TEST CASE CLASS PER FEATURE -> 2 podejscie
-class DocumentPublicationTest extends DocumentBase
+class DocumentVerificationTest extends DocumentBase
 {
     public function testCanBeVerifiedWhenXxx()
     {
