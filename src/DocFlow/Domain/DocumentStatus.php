@@ -8,6 +8,7 @@ class DocumentStatus extends Enum
 {
     public const DRAFT  = 'draft';
     public const VERIFIED  = 'verified';
+    public const ARCHIVED = 'archived';
 
     // ...
 }

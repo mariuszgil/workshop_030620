@@ -77,7 +77,7 @@ class Document
 
     public function archive(): void
     {
-
+        $this->status = DocumentStatus::ARCHIVED();
     }
 
     public function addReader(User $reader)
