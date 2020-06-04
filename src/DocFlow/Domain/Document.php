@@ -73,9 +73,15 @@ class Document
         $this->readers[] = $verifier;
     }
 
-    public function publish(): void
+    public function publish(EventPublisher $publisher): void
     {
+        if (!$this->status->equals(DocumentStatus::VERIFIED())) {
+            throw new \LogicException('...');
+        }
 
+        $publisher->publish(new Event());
+
+        $this->status = DocumentStatus::PUBLISHED();
     }
 
     public function archive(): void

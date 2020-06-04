@@ -29,4 +29,13 @@ class DocumentFactory
 
         return $document;
     }
+
+    public function createArchived(): Document
+    {
+        $document = $this->createDraft();
+
+        $document->archive();
+
+        return $document;
+    }
 }
