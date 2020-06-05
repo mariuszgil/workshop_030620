@@ -15,6 +15,17 @@ class DocumentPublicationTest extends TestCase
 {
     public function testMustBeSignedDuringPublication()
     {
+        // PROCES TWORZENIA ZASLEPKI (Z UZYCIEM PROPHECY)
+        // - $obj = $this->prophesize (utworzenie obiektu do konfiguracji)
+        // ... KONFIGURACJA
+        //    $obj->method()->willReturn(...)
+        //    $obj->method(Argument::type(...)->willReturn(...)
+        //    $obj->method(Argument::type(...)->shouldBeCalled()
+        //    $obj->method(Argument::type(...)->shouldBeCalledOnce()
+        //    $obj->method(Argument::type(...)->shouldBeCalledTimes(4)
+        // ..
+        // - $obj->reveal()  (konwersja konfiguracji do obiektu prawdziwego)
+
         $document = (new DocumentFactory())->createVerified();
         $publisher = $this->prophesize(EventPublisher::class)->reveal();
         $signer = $this->prophesize(DocumentSigner::class);
