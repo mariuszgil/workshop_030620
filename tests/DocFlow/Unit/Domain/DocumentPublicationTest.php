@@ -26,6 +26,19 @@ class DocumentPublicationTest extends TestCase
         // ..
         // - $obj->reveal()  (konwersja konfiguracji do obiektu prawdziwego)
 
+        // RODZAJE ZASLEPEK:
+        // 1. $obj = $this->prophesize($classOrInterface)->reveal()   nic nie potrafi, tylko udaje jakis obiekt
+        // 2. $obj = $this->prophesize($classOrInterface)
+        //    $obj->method()->willReturn(...)    potrafic zwrocic dane
+        //    $obj->reveal()
+        // 3. $obj = $this->prophesize($classOrInterface)
+        //    $obj->method()->shouldBeCalled()    // + willReturn
+        //    $obj->reveal()
+        // 4. $obj = $this->prophesize($classOrInterface)
+        //    $obj->method()->shouldHaveBenCalled()
+        //
+        // 5. $obj = new InMemoryCosTam(...)     // fake objects, pelna funkcjonalnosc, ale bardzo prosta
+
         $document = (new DocumentFactory())->createVerified();
         $publisher = $this->prophesize(EventPublisher::class)->reveal();
         $signer = $this->prophesize(DocumentSigner::class);

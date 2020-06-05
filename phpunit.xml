@@ -1,0 +1,34 @@
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/5.7/phpunit.xsd"
+         backupGlobals="false"
+         backupStaticAttributes="false"
+         beStrictAboutTestsThatDoNotTestAnything="true"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         failOnRisky="true"
+         processIsolation="false"
+         stopOnFailure="false"
+>
+    <testsuites>
+        <testsuite name="Document">
+            <directory>./tests/DocFlow/Unit/Domain</directory>
+            <exclude>./tests/DocFlow/Unit/Domain/*/</exclude>
+        </testsuite>
+        <testsuite name="NumberGenerator">
+            <directory>./tests/DocFlow/Unit/Domain/NumberGenerator</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src</directory>
+        </whitelist>
+    </filter>
+
+    <logging>
+        <log type="junit" target="./junit" />
+        <log type="coverage-html" target="./report" />
+    </logging>
+</phpunit>
