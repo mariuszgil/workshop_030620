@@ -3,6 +3,8 @@
 namespace Tests\DocFlow\Acceptance\Services;
 
 use DocFlow\Application\DocFlowService;
+use DocFlow\Domain\Documents;
+use DocFlow\Infrastructure\InMemoryDocuments;
 use Tests\DocFlow\Acceptance\GeneratingDocumentNewVersionTest;
 
 class ServicesTest extends GeneratingDocumentNewVersionTest
@@ -13,11 +15,17 @@ class ServicesTest extends GeneratingDocumentNewVersionTest
     private $service;
 
     /**
+     * @var Documents
+     */
+    private $documents;
+
+    /**
      * ServicesTest constructor.
      */
     public function __construct()
     {
         // dla uproszczenia, normalnie konfiguracja przez np. kontener DI
+        $this->documents = new InMemoryDocuments();
         $this->service = new DocFlowService(...);
     }
 
