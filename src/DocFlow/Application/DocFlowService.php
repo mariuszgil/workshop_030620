@@ -2,9 +2,13 @@
 
 namespace DocFlow\Application;
 
+use DocFlow\Domain\Clock\System;
+use DocFlow\Domain\Document;
 use DocFlow\Domain\Documents;
 use DocFlow\Domain\DocumentSigner;
+use DocFlow\Domain\DocumentType;
 use DocFlow\Domain\EventPublisher;
+use DocFlow\Domain\User;
 
 class DocFlowService
 {
@@ -55,6 +59,32 @@ class DocFlowService
 
         $this->documents->save($document);
     }
-
     // ...
+
+    /**
+     * @return Document
+     */
+    public function createDocument(): Document
+    {
+        $document = new Document(DocumentType::INSTRUCTION(), new User('Staszek'), new System());
+        $this->documents->save($document);
+
+        return $document;
+    }
+
+    /**
+     * @param string $number
+     * @return Document
+     */
+    public function createNewVersion(string $number): Document
+    {
+        $document = $this->documents->get($number);
+        $this->archiveDocument($document->getNumber());
+
+        $document_new = new Document($document->getType(), $document->getAuthor(), new System());
+        $document_new->changeContent($document->getTitle(), $document->getContent());
+        $this->documents->save($document_new);
+
+        return $document_new;
+    }
 }
