@@ -35,12 +35,12 @@ class Document
     /**
      * @var string
      */
-    private $title;
+    private $title = "";
 
     /**
      * @var string
      */
-    private $content;
+    private $content = "";
 
     /**
      * @var User[]
@@ -58,7 +58,7 @@ class Document
         $this->type = $type;
         $this->author = $author;
         $this->status = DocumentStatus::DRAFT();
-        $this->number = $type . '/' . $clock->getDateTime()->format('Y/m/d');
+        $this->number = $type . '/' . $clock->getDateTime()->format('Y/m/d') . uniqid("", false);
         $this->readers[] = $author;
     }
 

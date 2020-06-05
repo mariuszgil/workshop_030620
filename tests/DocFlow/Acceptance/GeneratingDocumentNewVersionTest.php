@@ -9,14 +9,14 @@ abstract class GeneratingDocumentNewVersionTest extends TestCase
     public function test()
     {
         $this->givenNewDocumentIsCreated();
-        $this->whenArchiveWasRequested();
+        $this->whenNewVersionWasRequested();
         $this->thenExistingDocumentWasArchived();
         $this->thenNewVersionWasCreated();
     }
 
     abstract protected function givenNewDocumentIsCreated();
 
-    abstract protected function whenArchiveWasRequested();
+    abstract protected function whenNewVersionWasRequested();
 
     abstract protected function thenExistingDocumentWasArchived();
 

@@ -11,7 +11,7 @@ class WebAppTest extends GeneratingDocumentNewVersionTest
         // TODO: Implement givenNewDocumentIsCreated() method.
     }
 
-    protected function whenArchiveWasRequested()
+    protected function whenNewVersionWasRequested()
     {
         // TODO: Implement whenArchiveWasRequested() method.
     }
