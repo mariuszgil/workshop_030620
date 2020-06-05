@@ -73,12 +73,13 @@ class Document
         $this->readers[] = $verifier;
     }
 
-    public function publish(EventPublisher $publisher): void
+    public function publish(DocumentSigner $signer, EventPublisher $publisher): void
     {
         if (!$this->status->equals(DocumentStatus::VERIFIED())) {
             throw new \LogicException('...');
         }
 
+        $signer->sign($this->author, $this->number);
         $publisher->publish(new Event());
 
         $this->status = DocumentStatus::PUBLISHED();
