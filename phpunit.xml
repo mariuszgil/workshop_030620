@@ -12,6 +12,10 @@
          stopOnFailure="false"
 >
     <testsuites>
+        <testsuite name="Integration">
+            <directory>./tests/DocFlow/Acceptance</directory>
+        </testsuite>
+
         <testsuite name="Document">
             <directory>./tests/DocFlow/Unit/Domain</directory>
             <exclude>./tests/DocFlow/Unit/Domain/*/</exclude>
